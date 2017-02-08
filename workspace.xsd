@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://cursive.ftwinston.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema targetNamespace="http://cursive.ftwinston.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="process">
+    <xs:sequence>
+      <xs:element name="Input" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="name" type="xs:string" use="required" />
+          <xs:attribute name="type" type="xs:string" use="required" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Output" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="type" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ReturnPaths" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Path" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required" />
+  </xs:complexType>
+
   <xs:element name="Workspace">
     <xs:complexType>
       <xs:sequence>
@@ -8,36 +37,8 @@
             <xs:attribute name="name" type="xs:string" use="required" />
           </xs:complexType>
         </xs:element>
-        <xs:element name="SystemProcess" minOccurs="1" maxOccurs="unbounded">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="Input" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                  <xs:attribute name="name" type="xs:string" use="required" />
-                  <xs:attribute name="type" type="xs:string" use="required" />
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="Output" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                  <xs:attribute name="name" type="xs:string" use="required" />
-                  <xs:attribute name="type" type="xs:string" use="required" />
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="ReturnPaths" minOccurs="0" maxOccurs="1">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="Path" minOccurs="0" maxOccurs="unbounded">
-                      <xs:complexType>
-                        <xs:attribute name="name" type="xs:string" use="required" />
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-            <xs:attribute name="name" type="xs:string" use="required" />
-          </xs:complexType>
-        </xs:element>
+		<xs:element name="RequiredProcess" type="process" minOccurs="1" maxOccurs="unbounded" />
+        <xs:element name="SystemProcess" type="process" minOccurs="1" maxOccurs="unbounded" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
