@@ -1,5 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="fixedInput">
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="value" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="mapInput">
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="source" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="mapOutput">
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="destination" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="returnPath">
+    <xs:attribute name="targetStepID" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="namedReturnPath">
+    <xs:complexContent>
+      <xs:extension base="returnPath">
+        <xs:attribute name="name" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+    
+  <xs:complexType name="step">
+    <xs:attribute name="ID" type="xs:string" use="required" />
+    <xs:attribute name="x" type="xs:nonNegativeInteger" use="optional" />
+    <xs:attribute name="y" type="xs:nonNegativeInteger" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="startStep">
+    <xs:complexContent>
+      <xs:extension base="step">
+        <xs:sequence>
+          <xs:element name="MapOutput" type="mapOutput" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="ReturnPath" type="returnPath" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="inputStep">
+    <xs:complexContent>
+      <xs:extension base="step">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="FixedInput" type="fixedInput" />
+            <xs:element name="MapInput" type="mapInput" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="stopStep">
+    <xs:complexContent>
+      <xs:extension base="inputStep">
+        <xs:attribute name="name" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="fullStep">
+    <xs:complexContent>
+      <xs:extension base="inputStep">
+        <xs:sequence>
+          <xs:element name="MapOutput" type="mapOutput" minOccurs="0" maxOccurs="unbounded" />
+          <xs:choice>
+            <xs:element name="ReturnPath" type="returnPath" minOccurs="1" maxOccurs="1" />
+            <xs:element name="NamedReturnPath" type="namedReturnPath" minOccurs="1" maxOccurs="unbounded" />
+          </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="process" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
   <xs:element name="Processes">
     <xs:complexType>
       <xs:sequence>
@@ -22,53 +94,12 @@
               <xs:element name="Steps">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="Step" minOccurs="1" maxOccurs="unbounded">
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="FixedInput" minOccurs="0" maxOccurs="unbounded">
-                            <xs:complexType>
-                              <xs:attribute name="name" type="xs:string" use="required" />
-                              <xs:attribute name="value" type="xs:string" use="required" />
-                            </xs:complexType>
-                          </xs:element>
-                          <xs:element name="MapInput" minOccurs="0" maxOccurs="unbounded">
-                            <xs:complexType>
-                              <xs:attribute name="name" type="xs:string" use="required" />
-                              <xs:attribute name="source" type="xs:string" use="required" />
-                            </xs:complexType>
-                          </xs:element>
-                          <xs:element name="MapOutput" minOccurs="0" maxOccurs="unbounded">
-                            <xs:complexType>
-                              <xs:attribute name="name" type="xs:string" use="required" />
-                              <xs:attribute name="destination" type="xs:string" use="required" />
-                            </xs:complexType>
-                          </xs:element>
-                          <xs:element name="ReturnPaths" minOccurs="1" maxOccurs="1">
-                            <xs:complexType>
-                              <xs:choice>
-                                <xs:element name="Single" minOccurs="1" maxOccurs="1">
-                                  <xs:complexType>
-                                    <xs:attribute name="targetStepID" type="xs:string" use="required" />
-                                  </xs:complexType>
-                                </xs:element>
-                                <xs:element name="Named" minOccurs="1" maxOccurs="unbounded">
-                                  <xs:complexType>
-                                    <xs:attribute name="name" type="xs:string" use="required" />
-                                    <xs:attribute name="targetStepID" type="xs:string" use="required" />
-                                  </xs:complexType>
-                                </xs:element>
-                              </xs:choice>
-                            </xs:complexType>
-                          </xs:element>
-                        </xs:sequence>
-                        <xs:attribute name="ID" type="xs:string" use="required" />
-                        <xs:attribute name="process" type="xs:string" use="required" />
-                        <xs:attribute name="x" type="xs:nonNegativeInteger" use="optional" />
-                        <xs:attribute name="y" type="xs:nonNegativeInteger" use="optional" />
-                      </xs:complexType>
-                    </xs:element>
+                    <xs:element name="Start" type="startStep" minOccurs="1" maxOccurs="1" />
+                    <xs:choice minOccurs="1" maxOccurs="unbounded">
+                      <xs:element name="Step" type="fullStep" />
+                      <xs:element name="Stop" type="stopStep" />
+                    </xs:choice>
                   </xs:sequence>
-                  <xs:attribute name="firstStep" type="xs:string" use="required" />
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
