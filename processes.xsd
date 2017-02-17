@@ -12,6 +12,17 @@
     <xs:attribute name="name" type="xs:string" use="required" />
     <xs:attribute name="destination" type="xs:string" use="required" />
   </xs:complexType>
+  <xs:complexType name="parameter">
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="type" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="variable">
+    <xs:complexContent>
+      <xs:extension base="parameter">
+        <xs:attribute name="initialValue" type="xs:string" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:complexType name="returnPath">
     <xs:attribute name="targetStepID" type="xs:string" use="required" />
   </xs:complexType>
@@ -22,7 +33,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-    
+
   <xs:complexType name="step">
     <xs:attribute name="ID" type="xs:string" use="required" />
     <xs:attribute name="x" type="xs:nonNegativeInteger" use="optional" />
@@ -78,19 +89,10 @@
         <xs:element minOccurs="0" maxOccurs="unbounded" name="Process">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Description" type="xs:string" />
-              <xs:element name="Input" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                  <xs:attribute name="name" type="xs:string" use="required" />
-                  <xs:attribute name="type" type="xs:string" use="required" />
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="Output" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                  <xs:attribute name="name" type="xs:string" use="required" />
-                  <xs:attribute name="type" type="xs:string" use="required" />
-                </xs:complexType>
-              </xs:element>
+              <xs:element name="Description" type="xs:string" minOccurs="0" maxOccurs="1" />
+              <xs:element name="Input" type="parameter" minOccurs="0" maxOccurs="unbounded" />
+              <xs:element name="Output" type="parameter" minOccurs="0" maxOccurs="unbounded" />
+              <xs:element name="Variable" type="variable" minOccurs="0" maxOccurs="unbounded" />
               <xs:element name="Steps">
                 <xs:complexType>
                   <xs:sequence>
