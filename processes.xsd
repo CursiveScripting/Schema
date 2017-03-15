@@ -86,13 +86,14 @@
   <xs:element name="Processes">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded" name="Process">
+        <xs:element name="Process" minOccurs="0" maxOccurs="unbounded">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Description" type="xs:string" minOccurs="0" maxOccurs="1" />
               <xs:element name="Input" type="parameter" minOccurs="0" maxOccurs="unbounded" />
               <xs:element name="Output" type="parameter" minOccurs="0" maxOccurs="unbounded" />
               <xs:element name="Variable" type="variable" minOccurs="0" maxOccurs="unbounded" />
+              <xs:element name="ReturnPath" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
               <xs:element name="Steps">
                 <xs:complexType>
                   <xs:sequence>
