@@ -10,24 +10,14 @@
     <xs:attribute name="type" type="xs:string" use="required" />
   </xs:complexType>
   <xs:complexType name="returnPath">
-    <xs:attribute name="targetStepID" type="xs:string" use="required" />
-  </xs:complexType>
-  <xs:complexType name="namedReturnPath">
-    <xs:complexContent>
-      <xs:extension base="returnPath">
-        <xs:attribute name="name" type="xs:string" use="required" />
-      </xs:extension>
-    </xs:complexContent>
+    <xs:attribute name="name" type="xs:string" use="required" />
   </xs:complexType>
   
   <xs:complexType name="process">
     <xs:sequence>
       <xs:element name="Input" type="parameter" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="Output" type="parameter" minOccurs="0" maxOccurs="unbounded" />
-      <xs:choice>
-        <xs:element name="ReturnPath" type="returnPath" minOccurs="1" maxOccurs="1" />
-        <xs:element name="NamedReturnPath" type="namedReturnPath" minOccurs="1" maxOccurs="unbounded" />
-      </xs:choice>
+      <xs:element name="ReturnPath" type="returnPath" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required" />
   </xs:complexType>
