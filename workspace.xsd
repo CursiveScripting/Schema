@@ -21,13 +21,7 @@
       <xs:element name="ReturnPath" type="returnPath" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required" />
-  </xs:complexType>
-  <xs:complexType name="systemProcess">
-    <xs:complexContent>
-      <xs:extension base="process">
-        <xs:attribute name="folder" type="xs:string" use="optional" />
-      </xs:extension>
-    </xs:complexContent>
+    <xs:attribute name="folder" type="xs:string" use="optional" />
   </xs:complexType>
   
   <xs:element name="Workspace">
@@ -43,7 +37,7 @@
           </xs:complexType>
         </xs:element>
         <xs:element name="RequiredProcess" type="process" minOccurs="1" maxOccurs="unbounded" />
-        <xs:element name="SystemProcess" type="systemProcess" minOccurs="1" maxOccurs="unbounded" />
+        <xs:element name="SystemProcess" type="process" minOccurs="1" maxOccurs="unbounded" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
