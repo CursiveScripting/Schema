@@ -15,6 +15,7 @@
   
   <xs:complexType name="process">
     <xs:sequence>
+      <xs:element name="Description" type="xs:string" minOccurs="0" maxOccurs="1" />
       <xs:element name="Input" type="parameter" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="Output" type="parameter" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="ReturnPath" type="returnPath" minOccurs="0" maxOccurs="unbounded" />
