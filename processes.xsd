@@ -20,6 +20,8 @@
     <xs:complexContent>
       <xs:extension base="parameter">
         <xs:attribute name="initialValue" type="xs:string" use="optional" />
+        <xs:attribute name="x" type="xs:nonNegativeInteger" use="optional" />
+        <xs:attribute name="y" type="xs:nonNegativeInteger" use="optional" />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
