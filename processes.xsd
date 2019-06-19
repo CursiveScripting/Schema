@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="fixedInput">
-    <xs:attribute name="name" type="xs:string" use="required" />
-    <xs:attribute name="value" type="xs:string" use="required" />
-  </xs:complexType>
   <xs:complexType name="mapInput">
     <xs:attribute name="name" type="xs:string" use="required" />
     <xs:attribute name="source" type="xs:string" use="required" />
@@ -55,10 +51,7 @@
     <xs:complexContent>
       <xs:extension base="step">
         <xs:sequence>
-          <xs:choice minOccurs="0" maxOccurs="unbounded">
-            <xs:element name="FixedInput" type="fixedInput" />
-            <xs:element name="MapInput" type="mapInput" />
-          </xs:choice>
+          <xs:element name="MapInput" type="mapInput" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
