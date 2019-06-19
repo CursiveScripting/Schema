@@ -41,7 +41,7 @@
     <xs:complexContent>
       <xs:extension base="step">
         <xs:sequence>
-          <xs:element name="MapOutput" type="mapOutput" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="Output" type="mapOutput" minOccurs="0" maxOccurs="unbounded" />
           <xs:element name="ReturnPath" type="returnPath" minOccurs="1" maxOccurs="1" />
         </xs:sequence>
       </xs:extension>
@@ -51,7 +51,7 @@
     <xs:complexContent>
       <xs:extension base="step">
         <xs:sequence>
-          <xs:element name="MapInput" type="mapInput" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="Input" type="mapInput" minOccurs="0" maxOccurs="unbounded" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -67,7 +67,7 @@
     <xs:complexContent>
       <xs:extension base="inputStep">
         <xs:sequence>
-          <xs:element name="MapOutput" type="mapOutput" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="Output" type="mapOutput" minOccurs="0" maxOccurs="unbounded" />
           <xs:choice>
             <xs:element name="ReturnPath" type="returnPath" minOccurs="1" maxOccurs="1" />
             <xs:element name="NamedReturnPath" type="namedReturnPath" minOccurs="1" maxOccurs="unbounded" />
