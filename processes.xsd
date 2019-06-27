@@ -16,8 +16,8 @@
     <xs:complexContent>
       <xs:extension base="parameter">
         <xs:attribute name="initialValue" type="xs:string" use="optional" />
-        <xs:attribute name="x" type="xs:nonNegativeInteger" use="optional" />
-        <xs:attribute name="y" type="xs:nonNegativeInteger" use="optional" />
+        <xs:attribute name="x" type="xs:nonNegativeInteger" use="required" />
+        <xs:attribute name="y" type="xs:nonNegativeInteger" use="required" />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -34,8 +34,8 @@
 
   <xs:complexType name="step">
     <xs:attribute name="ID" type="xs:string" use="required" />
-    <xs:attribute name="x" type="xs:nonNegativeInteger" use="optional" />
-    <xs:attribute name="y" type="xs:nonNegativeInteger" use="optional" />
+    <xs:attribute name="x" type="xs:nonNegativeInteger" use="required" />
+    <xs:attribute name="y" type="xs:nonNegativeInteger" use="required" />
   </xs:complexType>
   <xs:complexType name="startStep">
     <xs:complexContent>
