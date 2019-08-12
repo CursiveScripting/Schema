@@ -36,6 +36,16 @@
             <xs:attribute name="guidance" type="xs:string" use="optional" />
           </xs:complexType>
         </xs:element>
+        <xs:element name="LookupType" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Option" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="color" type="color" use="required" />
+            <xs:attribute name="guidance" type="xs:string" use="optional" />
+          </xs:complexType>
+        </xs:element>
         <xs:element name="RequiredProcess" type="process" minOccurs="1" maxOccurs="unbounded" />
         <xs:element name="SystemProcess" type="process" minOccurs="1" maxOccurs="unbounded" />
       </xs:sequence>
