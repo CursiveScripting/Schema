@@ -1,0 +1,160 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"$id": "https://github.com/CursiveScripting/Schema/blob/master/processes.json",
+	
+	"definitions": {
+		"parameter": {
+			"type": "object",
+			"properties": {
+				"name": { "type": "string" },
+				"type": { "type": "string" },
+			},
+			"required": ["name", "type"]
+		},
+		"parameters": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": { "$ref": "#/definitions/parameter" }
+		},
+		"position": {
+			"type": "object",
+			"properties": {
+				"x": { "type": "integer" },
+				"y": { "type": "integer" }
+			},
+			"required": ["x", "y"]
+		},
+		"stepParameters": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": { "type": "string" },
+					"variable": { "type": "string" },
+				},
+				"required": ["name"]
+			}
+		},
+		"namedReturnPaths": {
+			"type": "object",
+			"properties": {},
+			"additionalProperties": { "type": "string" }
+		},
+		"step": {
+			"type": "object",
+			"allOf": [
+				{ "$ref": "#/definitions/position" },
+				{
+					"properties": {
+						"id": { "type": "string" }
+					},
+					"required": ["id"]
+				}
+			]
+		},
+		"stepWithInput": {
+			"type": "object",
+			"allOf": [
+				{ "$ref": "#/definitions/step" },
+				{
+					"properties": {
+						"inputs": { "$ref": "#/definitions/stepParameters" }
+					}
+				}
+			]
+		}
+	},
+	
+	"type": "array",
+	"items": {
+		"type": "object",
+		"properties": {
+			"name": { "type": "string" },
+			"description": { "type": "string" },
+			"folder": { "type": "string" },
+			"inputs": { "$ref": "#/definitions/parameters" },
+			"outputs": { "$ref": "#/definitions/parameters" },
+			"returnPaths": {
+				"type": "array",
+				"uniqueItems": true,
+				"minItems": 2,
+				"items": { "type": "string" }
+			},
+			"variables": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"allOf": [
+						{ "$ref": "#/definitions/parameter" },
+						{ "$ref": "#/definitions/position" }
+					]
+				}
+			},
+			"steps": {
+				"type": "array",
+				"items": [
+					{
+						"type": "object",
+						"allOf": [
+							{ "$ref": "#/definitions/step" },
+							{
+								"properties": {
+									"type": { "const": "start" },
+									"outputs": { "$ref": "#/definitions/parameters" },
+									"returnPath": { "type": "string" }
+								},
+								"required": ["type"]
+							}
+						]
+					}
+				],
+				"additionalItems": {
+					"type": "object",
+					"oneOf": [
+						{
+							"allOf": [
+								{ "$ref": "#/definitions/stepWithInput" },
+								{
+									"properties": {
+										"type": { "const": "process" },
+										"outputs": { "$ref": "#/definitions/parameters" },
+									},
+									"required": ["type"]
+								},
+								{
+									"oneOf": [
+										{
+											"properties": {
+												"returnPath": { "type": "string" }
+											},
+										},
+										{
+											"properties": {
+												"returnPaths": { "$ref": "#/definitions/namedReturnPaths" }
+											},
+											"required": ["returnPaths"]
+										}
+									]
+								}
+							]
+						},
+						{
+							"allOf": [
+								{ "$ref": "#/definitions/stepWithInput" },
+								{
+									"properties": {
+										"type": { "const": "stop" },
+										"name": { "type": "string" },
+									},
+									"required": ["type"]
+								}
+							]
+						}
+					]
+				}
+			}
+		},
+		"required": ["name"]
+	}	
+}
