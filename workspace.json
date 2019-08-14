@@ -91,5 +91,5 @@
 		"requiredProcesses": { "$ref": "#/definitions/processes" },
 		"systemProcesses": { "$ref": "#/definitions/processes" }
 	},
-	"required": [ "required", "system" ]
+  "required": [ "requiredProcesses", "systemProcesses" ]
 }
