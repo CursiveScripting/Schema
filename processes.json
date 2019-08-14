@@ -7,7 +7,7 @@
 			"type": "object",
 			"properties": {
 				"name": { "type": "string" },
-				"type": { "type": "string" },
+				"type": { "type": "string" }
 			},
 			"required": ["name", "type"]
 		},
@@ -31,7 +31,7 @@
 				"type": "object",
 				"properties": {
 					"name": { "type": "string" },
-					"variable": { "type": "string" },
+					"variable": { "type": "string" }
 				},
 				"required": ["name"]
 			}
@@ -118,7 +118,7 @@
 								{
 									"properties": {
 										"type": { "const": "process" },
-										"outputs": { "$ref": "#/definitions/parameters" },
+										"outputs": { "$ref": "#/definitions/parameters" }
 									},
 									"required": ["type"]
 								},
@@ -127,7 +127,7 @@
 										{
 											"properties": {
 												"returnPath": { "type": "string" }
-											},
+											}
 										},
 										{
 											"properties": {
@@ -145,7 +145,7 @@
 								{
 									"properties": {
 										"type": { "const": "stop" },
-										"name": { "type": "string" },
+										"name": { "type": "string" }
 									},
 									"required": ["type"]
 								}

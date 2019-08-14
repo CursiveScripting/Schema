@@ -11,7 +11,7 @@
 					"type": "string",
 					"pattern": "^#[0-9A-Fa-f]{3,6}$"
 				},
-				"guidance": { "type": "string" },
+				"guidance": { "type": "string" }
 			},
 			"required": ["name", "color"]
 		},
@@ -22,7 +22,7 @@
 				"type": "object",
 				"properties": {
 					"name": { "type": "string" },
-					"type": { "type": "string" },
+					"type": { "type": "string" }
 				},
 				"required": ["name", "type"]
 			}
@@ -68,7 +68,7 @@
 										"type": "string",
 										"format": "regex"
 									},
-									"extends": { "type": "string" },
+									"extends": { "type": "string" }
 								}
 							},
 							{
