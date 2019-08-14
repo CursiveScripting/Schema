@@ -24,19 +24,7 @@
 			},
 			"required": ["x", "y"]
 		},
-		"stepParameters": {
-			"type": "array",
-			"uniqueItems": true,
-			"items": {
-				"type": "object",
-				"properties": {
-					"name": { "type": "string" },
-					"variable": { "type": "string" }
-				},
-				"required": ["name"]
-			}
-		},
-		"namedReturnPaths": {
+		"nameMap": {
 			"type": "object",
 			"properties": {},
 			"additionalProperties": { "type": "string" }
@@ -58,9 +46,9 @@
 			"allOf": [
 				{ "$ref": "#/definitions/step" },
 				{
-					"properties": {
-						"inputs": { "$ref": "#/definitions/stepParameters" }
-					}
+          "properties": {
+            "inputs": { "$ref": "#/definitions/nameMap" }
+          }
 				}
 			]
 		}
@@ -87,7 +75,12 @@
 					"type": "object",
 					"allOf": [
 						{ "$ref": "#/definitions/parameter" },
-						{ "$ref": "#/definitions/position" }
+						{ "$ref": "#/definitions/position" },
+						{
+							"properties": {
+								"initialValue": { "type": "string" }
+							}
+						}
 					]
 				}
 			},
@@ -99,11 +92,11 @@
 						"allOf": [
 							{ "$ref": "#/definitions/step" },
 							{
-								"properties": {
-									"type": { "const": "start" },
-									"outputs": { "$ref": "#/definitions/parameters" },
-									"returnPath": { "type": "string" }
-								},
+                "properties": {
+                  "type": { "const": "start" },
+                  "outputs": { "$ref": "#/definitions/nameMap" },
+                  "returnPath": { "type": "string" }
+                },
 								"required": ["type"]
 							}
 						]
@@ -116,10 +109,10 @@
 							"allOf": [
 								{ "$ref": "#/definitions/stepWithInput" },
 								{
-									"properties": {
-										"type": { "const": "process" },
-										"outputs": { "$ref": "#/definitions/parameters" }
-									},
+                  "properties": {
+                    "type": { "const": "process" },
+                    "outputs": { "$ref": "#/definitions/nameMap" }
+                  },
 									"required": ["type"]
 								},
 								{
@@ -131,7 +124,7 @@
 										},
 										{
 											"properties": {
-												"returnPaths": { "$ref": "#/definitions/namedReturnPaths" }
+												"returnPaths": { "$ref": "#/definitions/nameMap" }
 											},
 											"required": ["returnPaths"]
 										}
