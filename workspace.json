@@ -1,95 +1,95 @@
 {
-	"$schema": "http://json-schema.org/schema#",
-	"$id": "https://cursivescripting.github.io/Schema/workspace.json",
-	
-	"definitions": {
-		"type": {
-			"type": "object",
-			"properties": {
-				"name": { "type": "string" },
-				"color": {
-					"type": "string",
-					"pattern": "^#[0-9A-Fa-f]{3,6}$"
-				},
-				"guidance": { "type": "string" }
-			},
-			"required": ["name", "color"]
-		},
-		"parameters": {
-			"type": "array",
-			"uniqueItems": true,
-			"items": {
-				"type": "object",
-				"properties": {
-					"name": { "type": "string" },
-					"type": { "type": "string" }
-				},
-				"required": ["name", "type"]
-			}
-		},
-		"processes": {
-			"type": "array",
-			"uniqueItems": true,
-			"minItems": 1,
-			"items": {
-				"type": "object",
-				"properties": {
-					"name": { "type": "string" },
-					"description": { "type": "string" },
-					"folder": { "type": "string" },
-					"inputs": { "$ref": "#/definitions/parameters" },
-					"outputs": { "$ref": "#/definitions/parameters" },
-					"returnPaths": {
-						"type": "array",
-						"uniqueItems": true,
-						"minItems": 2,
-						"items": { "type": "string" }
-					}
-				},
-				"required": ["name"]
-			}
-		}
-	},
-	
-	"type": "object",
-	"properties": {
-		"types": {
-			"type": "array",
-			"uniqueItems": true,
-			"items": {
-				"type": "object",
-				"allOf": [
-					{ "$ref": "#/definitions/type" },
-					{
-						"oneOf": [
-							{
-								"properties": {
-									"validation": {
-										"type": "string",
-										"format": "regex"
-									},
-									"extends": { "type": "string" }
-								}
-							},
-							{
-								"properties": {
-									"options": {
-										"type": "array",
-										"items": {
-											"type": "string",
-											"uniqueItems": true
-										}
-									}
-								},
-								"required": ["options"]
-							}
-						]
-					}
-				]
-			}
-		},
-		"requiredProcesses": { "$ref": "#/definitions/processes" },
-		"systemProcesses": { "$ref": "#/definitions/processes" }
-	},
+  "$schema": "http://json-schema.org/schema#",
+  "$id": "https://cursivescripting.github.io/Schema/workspace.json",
+  
+  "definitions": {
+    "type": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "color": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{3,6}$"
+        },
+        "guidance": { "type": "string" }
+      },
+      "required": ["name", "color"]
+    },
+    "parameters": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" }
+        },
+        "required": ["name", "type"]
+      }
+    },
+    "processes": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "folder": { "type": "string" },
+          "inputs": { "$ref": "#/definitions/parameters" },
+          "outputs": { "$ref": "#/definitions/parameters" },
+          "returnPaths": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 2,
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["name"]
+      }
+    }
+  },
+  
+  "type": "object",
+  "properties": {
+    "types": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "allOf": [
+          { "$ref": "#/definitions/type" },
+          {
+            "oneOf": [
+              {
+                "properties": {
+                  "validation": {
+                    "type": "string",
+                    "format": "regex"
+                  },
+                  "extends": { "type": "string" }
+                }
+              },
+              {
+                "properties": {
+                  "options": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "uniqueItems": true
+                    }
+                  }
+                },
+                "required": ["options"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "requiredProcesses": { "$ref": "#/definitions/processes" },
+    "systemProcesses": { "$ref": "#/definitions/processes" }
+  },
   "required": [ "requiredProcesses", "systemProcesses" ]
 }
