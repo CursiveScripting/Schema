@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/schema#",
-	"$id": "https://github.com/CursiveScripting/Schema/blob/master/processes.json",
+	"$id": "https://cursivescripting.github.io/Schema/processes.json",
 	
 	"definitions": {
 		"parameter": {
