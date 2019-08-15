@@ -111,6 +111,7 @@
                 {
                   "properties": {
                     "type": { "const": "process" },
+                    "process": { "type": "string" },
                     "outputs": { "$ref": "#/definitions/nameMap" }
                   },
                   "required": ["type"]
