@@ -97,7 +97,7 @@
                   "outputs": { "$ref": "#/definitions/nameMap" },
                   "returnPath": { "type": "string" }
                 },
-                "required": ["type"]
+                "required": ["type", "returnPath"]
               }
             ]
           }
@@ -150,6 +150,6 @@
         }
       }
     },
-    "required": ["name"]
+    "required": ["name", "steps"]
   }  
 }
