@@ -65,8 +65,18 @@
               {
                 "properties": {
                   "validation": {
-                    "type": "string",
-                    "format": "regex"
+                    "type": "object",
+                    "properties": {
+                        "pattern": {
+                            "type": "string",
+                            "format": "regex"
+                        },
+                        "flags": {
+                            "type": "string",
+                            "pattern": "[a-zA-Z]+"
+                        }
+                    },
+                    "required": ["pattern"]
                   },
                   "extends": { "type": "string" }
                 }
